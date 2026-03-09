@@ -25,11 +25,7 @@ class UserAvatar extends StatelessWidget {
       backgroundImage: hasImage ? NetworkImage(imageUrl!) : null,
       child: hasImage
           ? null
-          : Icon(
-              Icons.person,
-              color: AppColors.primaryBlue,
-              size: radius,
-            ),
+          : Icon(Icons.person, color: AppColors.primaryBlue, size: radius),
     );
 
     if (!isOnline) {

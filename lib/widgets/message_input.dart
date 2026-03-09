@@ -61,7 +61,10 @@ class MessageInput extends StatelessWidget {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: AppRadius.lg,
-                    borderSide: const BorderSide(color: AppColors.primaryBlue, width: 1.4),
+                    borderSide: const BorderSide(
+                      color: AppColors.primaryBlue,
+                      width: 1.4,
+                    ),
                   ),
                 ),
               ),

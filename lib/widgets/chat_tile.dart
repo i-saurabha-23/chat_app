@@ -5,39 +5,44 @@ import '../constants/app_sizes.dart';
 import 'user_avatar.dart';
 
 class ChatTile extends StatelessWidget {
-  const ChatTile({
-    super.key,
-    required this.chatModel,
-    this.onTap,
-  });
+  const ChatTile({super.key, required this.chatModel, this.onTap});
 
   final dynamic chatModel;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final String friendName = _readString(
-      const ['friendName', 'name', 'fullName', 'displayName'],
-      fallback: 'Unknown User',
-    );
-    final String lastMessage = _readString(
-      const ['lastMessage', 'message', 'text'],
-      fallback: 'No messages yet',
-    );
-    final String imageUrl = _readString(
-      const ['avatarUrl', 'profilePic', 'imageUrl', 'photoUrl'],
-    );
-    final DateTime? time = _readDateTime(
-      const ['lastMessageTime', 'timestamp', 'time'],
-    );
-    final int unreadCount = _readInt(
-      const ['unreadCount', 'unread', 'count'],
-      fallback: 0,
-    );
-    final bool isOnline = _readBool(
-      const ['isOnline', 'online'],
-      fallback: false,
-    );
+    final String friendName = _readString(const [
+      'friendName',
+      'name',
+      'fullName',
+      'displayName',
+    ], fallback: 'Unknown User');
+    final String lastMessage = _readString(const [
+      'lastMessage',
+      'message',
+      'text',
+    ], fallback: 'No messages yet');
+    final String imageUrl = _readString(const [
+      'avatarUrl',
+      'profilePic',
+      'imageUrl',
+      'photoUrl',
+    ]);
+    final DateTime? time = _readDateTime(const [
+      'lastMessageTime',
+      'timestamp',
+      'time',
+    ]);
+    final int unreadCount = _readInt(const [
+      'unreadCount',
+      'unread',
+      'count',
+    ], fallback: 0);
+    final bool isOnline = _readBool(const [
+      'isOnline',
+      'online',
+    ], fallback: false);
 
     return InkWell(
       onTap: onTap,
@@ -105,7 +110,9 @@ class ChatTile extends StatelessWidget {
                     ),
                     decoration: const BoxDecoration(
                       color: AppColors.primaryBlue,
-                      borderRadius: BorderRadius.all(Radius.circular(AppSizes.max)),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(AppSizes.max),
+                      ),
                     ),
                     child: Text(
                       unreadCount > 99 ? '99+' : unreadCount.toString(),
@@ -194,7 +201,10 @@ class ChatTile extends StatelessWidget {
     }
 
     final now = DateTime.now();
-    final isToday = now.year == value.year && now.month == value.month && now.day == value.day;
+    final isToday =
+        now.year == value.year &&
+        now.month == value.month &&
+        now.day == value.day;
 
     if (isToday) {
       final int rawHour = value.hour;

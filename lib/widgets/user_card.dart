@@ -21,17 +21,23 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String name = _readString(
-      const ['name', 'fullName', 'displayName', 'userName', 'username'],
-      fallback: 'Unknown User',
-    );
-    final String imageUrl = _readString(
-      const ['profilePic', 'imageUrl', 'avatarUrl', 'photoUrl'],
-    );
-    final bool isOnline = _readBool(
-      const ['isOnline', 'online'],
-      fallback: false,
-    );
+    final String name = _readString(const [
+      'name',
+      'fullName',
+      'displayName',
+      'userName',
+      'username',
+    ], fallback: 'Unknown User');
+    final String imageUrl = _readString(const [
+      'profilePic',
+      'imageUrl',
+      'avatarUrl',
+      'photoUrl',
+    ]);
+    final bool isOnline = _readBool(const [
+      'isOnline',
+      'online',
+    ], fallback: false);
 
     return Card(
       elevation: 0,

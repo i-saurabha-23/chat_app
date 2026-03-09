@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../chat/chat_list/chat_list_view.dart';
+import '../../bottom_nav/bottom_nav_view.dart';
 import '../../constants/firebase_constants.dart';
 import '../../widgets/error_view.dart';
 import '../../widgets/loading_widget.dart';
@@ -47,7 +47,7 @@ class _SplashViewState extends State<SplashView> {
               .get();
 
       if (userSnapshot.exists) {
-        _navigateTo(const ChatListView());
+        _navigateTo(const BottomNavView());
         return;
       }
 

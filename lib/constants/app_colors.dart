@@ -32,10 +32,6 @@ class AppGradients {
   static const LinearGradient blueLeather = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: <Color>[
-      Color(0xFF0E3A66),
-      Color(0xFF1F5A93),
-      Color(0xFFE7F1FA),
-    ],
+    colors: <Color>[Color(0xFF0E3A66), Color(0xFF1F5A93), Color(0xFFE7F1FA)],
   );
 }

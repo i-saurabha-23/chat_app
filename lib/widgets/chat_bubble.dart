@@ -19,13 +19,19 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color bubbleColor = isSender ? AppColors.primaryBlue : AppColors.surface;
-    final Color textColor = isSender ? AppColors.textOnPrimary : AppColors.textPrimary;
+    final Color bubbleColor = isSender
+        ? AppColors.primaryBlue
+        : AppColors.surface;
+    final Color textColor = isSender
+        ? AppColors.textOnPrimary
+        : AppColors.textPrimary;
 
     return Align(
       alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.75,
+        ),
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: AppSizes.xs),
           padding: const EdgeInsets.symmetric(
@@ -37,21 +43,19 @@ class ChatBubble extends StatelessWidget {
             borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(AppSizes.radiusLg),
               topRight: const Radius.circular(AppSizes.radiusLg),
-              bottomLeft: Radius.circular(isSender ? AppSizes.radiusLg : AppSizes.xs),
-              bottomRight: Radius.circular(isSender ? AppSizes.xs : AppSizes.radiusLg),
+              bottomLeft: Radius.circular(
+                isSender ? AppSizes.radiusLg : AppSizes.xs,
+              ),
+              bottomRight: Radius.circular(
+                isSender ? AppSizes.xs : AppSizes.radiusLg,
+              ),
             ),
             border: isSender ? null : Border.all(color: AppColors.border),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                message,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 14,
-                ),
-              ),
+              Text(message, style: TextStyle(color: textColor, fontSize: 14)),
               AppGaps.hXS,
               Row(
                 mainAxisSize: MainAxisSize.min,
@@ -59,14 +63,13 @@ class ChatBubble extends StatelessWidget {
                   Text(
                     _formatTime(timestamp),
                     style: TextStyle(
-                      color: isSender ? AppColors.softBlue : AppColors.textSecondary,
+                      color: isSender
+                          ? AppColors.softBlue
+                          : AppColors.textSecondary,
                       fontSize: 11,
                     ),
                   ),
-                  if (isSender) ...[
-                    AppGaps.wXS,
-                    _statusIcon(),
-                  ],
+                  if (isSender) ...[AppGaps.wXS, _statusIcon()],
                 ],
               ),
             ],

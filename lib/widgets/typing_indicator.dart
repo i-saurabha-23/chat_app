@@ -4,10 +4,7 @@ import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 
 class TypingIndicator extends StatelessWidget {
-  const TypingIndicator({
-    super.key,
-    required this.userName,
-  });
+  const TypingIndicator({super.key, required this.userName});
 
   final String userName;
 

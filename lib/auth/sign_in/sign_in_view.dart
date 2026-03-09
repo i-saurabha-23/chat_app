@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../chat/chat_list/chat_list_view.dart';
+import '../../bottom_nav/bottom_nav_view.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_sizes.dart';
 import '../../widgets/app_text_field.dart';
@@ -54,7 +54,7 @@ class _SignInFormState extends State<_SignInForm> {
 
     Navigator.of(
       context,
-    ).pushReplacement(noTransitionRoute(const ChatListView()));
+    ).pushReplacement(noTransitionRoute(const BottomNavView()));
   }
 
   @override

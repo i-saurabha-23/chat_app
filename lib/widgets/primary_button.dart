@@ -66,12 +66,7 @@ class PrimaryButton extends StatelessWidget {
       children: [
         icon!,
         AppGaps.wSM,
-        Flexible(
-          child: Text(
-            text,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
+        Flexible(child: Text(text, overflow: TextOverflow.ellipsis)),
       ],
     );
   }

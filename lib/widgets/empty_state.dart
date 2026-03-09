@@ -28,11 +28,7 @@ class EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              size: AppSizes.giant,
-              color: AppColors.secondaryBlue,
-            ),
+            Icon(icon, size: AppSizes.giant, color: AppColors.secondaryBlue),
             AppGaps.hMD,
             Text(
               title,
@@ -56,11 +52,7 @@ class EmptyState extends StatelessWidget {
             ],
             if (actionText != null && onAction != null) ...[
               AppGaps.hLG,
-              PrimaryButton(
-                text: actionText!,
-                onPressed: onAction,
-                width: 180,
-              ),
+              PrimaryButton(text: actionText!, onPressed: onAction, width: 180),
             ],
           ],
         ),

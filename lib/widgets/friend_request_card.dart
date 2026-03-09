@@ -19,13 +19,19 @@ class FriendRequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String name = _readString(
-      const ['name', 'fullName', 'displayName', 'userName', 'username'],
-      fallback: 'Unknown User',
-    );
-    final String imageUrl = _readString(
-      const ['profilePic', 'imageUrl', 'avatarUrl', 'photoUrl'],
-    );
+    final String name = _readString(const [
+      'name',
+      'fullName',
+      'displayName',
+      'userName',
+      'username',
+    ], fallback: 'Unknown User');
+    final String imageUrl = _readString(const [
+      'profilePic',
+      'imageUrl',
+      'avatarUrl',
+      'photoUrl',
+    ]);
 
     return Card(
       elevation: 0,
@@ -40,10 +46,7 @@ class FriendRequestCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                UserAvatar(
-                  imageUrl: imageUrl,
-                  radius: AppSizes.xl,
-                ),
+                UserAvatar(imageUrl: imageUrl, radius: AppSizes.xl),
                 AppGaps.wMD,
                 Expanded(
                   child: Text(

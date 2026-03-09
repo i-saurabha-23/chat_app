@@ -36,25 +36,49 @@ class AppSizes {
 class AppPaddings {
   AppPaddings._();
 
+  static const EdgeInsets zero = EdgeInsets.zero;
+
   static const EdgeInsets allXs = EdgeInsets.all(AppSizes.xs);
   static const EdgeInsets allSm = EdgeInsets.all(AppSizes.sm);
   static const EdgeInsets allMd = EdgeInsets.all(AppSizes.md);
   static const EdgeInsets allLg = EdgeInsets.all(AppSizes.lg);
   static const EdgeInsets allXl = EdgeInsets.all(AppSizes.xl);
 
-  static const EdgeInsets horizontalSm = EdgeInsets.symmetric(horizontal: AppSizes.sm);
-  static const EdgeInsets horizontalMd = EdgeInsets.symmetric(horizontal: AppSizes.md);
-  static const EdgeInsets horizontalLg = EdgeInsets.symmetric(horizontal: AppSizes.lg);
-  static const EdgeInsets horizontalXl = EdgeInsets.symmetric(horizontal: AppSizes.xl);
+  static const EdgeInsets horizontalSm = EdgeInsets.symmetric(
+    horizontal: AppSizes.sm,
+  );
+  static const EdgeInsets horizontalMd = EdgeInsets.symmetric(
+    horizontal: AppSizes.md,
+  );
+  static const EdgeInsets horizontalLg = EdgeInsets.symmetric(
+    horizontal: AppSizes.lg,
+  );
+  static const EdgeInsets horizontalXl = EdgeInsets.symmetric(
+    horizontal: AppSizes.xl,
+  );
 
-  static const EdgeInsets verticalXs = EdgeInsets.symmetric(vertical: AppSizes.xs);
-  static const EdgeInsets verticalSm = EdgeInsets.symmetric(vertical: AppSizes.sm);
-  static const EdgeInsets verticalMd = EdgeInsets.symmetric(vertical: AppSizes.md);
-  static const EdgeInsets verticalLg = EdgeInsets.symmetric(vertical: AppSizes.lg);
+  static const EdgeInsets verticalXs = EdgeInsets.symmetric(
+    vertical: AppSizes.xs,
+  );
+  static const EdgeInsets verticalSm = EdgeInsets.symmetric(
+    vertical: AppSizes.sm,
+  );
+  static const EdgeInsets verticalMd = EdgeInsets.symmetric(
+    vertical: AppSizes.md,
+  );
+  static const EdgeInsets verticalLg = EdgeInsets.symmetric(
+    vertical: AppSizes.lg,
+  );
 
-  static const EdgeInsets screen = EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.md);
+  static const EdgeInsets screen = EdgeInsets.symmetric(
+    horizontal: AppSizes.md,
+    vertical: AppSizes.md,
+  );
   static const EdgeInsets card = EdgeInsets.all(AppSizes.md);
-  static const EdgeInsets button = EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.sm);
+  static const EdgeInsets button = EdgeInsets.symmetric(
+    horizontal: AppSizes.lg,
+    vertical: AppSizes.sm,
+  );
 }
 
 class AppMargins {
@@ -74,8 +98,12 @@ class AppMargins {
   static const EdgeInsets bottomMd = EdgeInsets.only(bottom: AppSizes.md);
   static const EdgeInsets bottomLg = EdgeInsets.only(bottom: AppSizes.lg);
 
-  static const EdgeInsets horizontalMd = EdgeInsets.symmetric(horizontal: AppSizes.md);
-  static const EdgeInsets verticalMd = EdgeInsets.symmetric(vertical: AppSizes.md);
+  static const EdgeInsets horizontalMd = EdgeInsets.symmetric(
+    horizontal: AppSizes.md,
+  );
+  static const EdgeInsets verticalMd = EdgeInsets.symmetric(
+    vertical: AppSizes.md,
+  );
 }
 
 class AppGaps {
@@ -104,9 +132,19 @@ class AppGaps {
 class AppRadius {
   AppRadius._();
 
-  static const BorderRadius xs = BorderRadius.all(Radius.circular(AppSizes.radiusXs));
-  static const BorderRadius sm = BorderRadius.all(Radius.circular(AppSizes.radiusSm));
-  static const BorderRadius md = BorderRadius.all(Radius.circular(AppSizes.radiusMd));
-  static const BorderRadius lg = BorderRadius.all(Radius.circular(AppSizes.radiusLg));
-  static const BorderRadius xl = BorderRadius.all(Radius.circular(AppSizes.radiusXl));
+  static const BorderRadius xs = BorderRadius.all(
+    Radius.circular(AppSizes.radiusXs),
+  );
+  static const BorderRadius sm = BorderRadius.all(
+    Radius.circular(AppSizes.radiusSm),
+  );
+  static const BorderRadius md = BorderRadius.all(
+    Radius.circular(AppSizes.radiusMd),
+  );
+  static const BorderRadius lg = BorderRadius.all(
+    Radius.circular(AppSizes.radiusLg),
+  );
+  static const BorderRadius xl = BorderRadius.all(
+    Radius.circular(AppSizes.radiusXl),
+  );
 }
