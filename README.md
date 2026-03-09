@@ -1,16 +1,83 @@
-# chat_app
+# Chat App
 
-A new Flutter project.
+A Flutter chat application with:
+- Username/password authentication (custom Firestore-based flow)
+- Friends system (search, send/receive requests, accept/reject)
+- Real-time chat using Firestore streams
+- AES-encrypted message payloads
+- Profile image upload (camera/gallery with permissions)
+- Bottom navigation (Chats, Friends, Profile, Settings)
 
-## Getting Started
+## Tech Stack
 
-This project is a starting point for a Flutter application.
+- Flutter (Dart)
+- Firebase Core
+- Cloud Firestore
+- Firebase Messaging
+- Flutter Local Notifications
+- Provider
 
-A few resources to get you started if this is your first Flutter project:
+## Project Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- `lib/auth/` - sign-in, sign-up, splash, auth session
+- `lib/chats/` - chat list and conversation
+- `lib/friends/` - user search, friend requests, public profile
+- `lib/profile/` - user profile view/edit
+- `lib/widgets/` - reusable UI components
+- `lib/constants/` - app constants and Firebase config
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Prerequisites
+
+- Flutter SDK installed
+- Android Studio / VS Code
+- Android SDK + emulator or physical Android device
+- Firebase project configured
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+flutter pub get
+```
+
+2. Verify Firebase config in:
+
+- `lib/constants/firebase_constants.dart`
+
+3. Run the app:
+
+```bash
+flutter run
+```
+
+## Build APK
+
+Debug APK:
+
+```bash
+flutter build apk --debug
+```
+
+Release APK:
+
+```bash
+flutter build apk --release
+```
+
+## Ready-to-Install APKs
+
+For easy access (outside `build/`), APKs are copied to:
+
+- `apk/chat_app-debug.apk`
+- `apk/chat_app-release.apk`
+
+Install with ADB:
+
+```bash
+adb install -r apk/chat_app-release.apk
+```
+
+## Notification Note
+
+The app stores FCM tokens, but automatic push delivery for new chat messages requires a backend sender (for example, a Firebase Cloud Function trigger on new message documents).
