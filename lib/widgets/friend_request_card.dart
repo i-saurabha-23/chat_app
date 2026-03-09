@@ -11,11 +11,13 @@ class FriendRequestCard extends StatelessWidget {
     required this.requestModel,
     required this.onAccept,
     required this.onReject,
+    this.onTap,
   });
 
   final dynamic requestModel;
   final VoidCallback onAccept;
   final VoidCallback onReject;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -40,55 +42,61 @@ class FriendRequestCard extends StatelessWidget {
         borderRadius: AppRadius.md,
         side: const BorderSide(color: AppColors.border),
       ),
-      child: Padding(
-        padding: AppPaddings.allMd,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                UserAvatar(imageUrl: imageUrl, radius: AppSizes.xl),
-                AppGaps.wMD,
-                Expanded(
-                  child: Text(
-                    name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: AppRadius.md,
+        child: Padding(
+          padding: AppPaddings.allMd,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  UserAvatar(imageUrl: imageUrl, radius: AppSizes.xl),
+                  AppGaps.wMD,
+                  Expanded(
+                    child: Text(
+                      name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            AppGaps.hMD,
-            Row(
-              children: [
-                Expanded(
-                  child: PrimaryButton(
-                    text: 'Accept',
-                    onPressed: onAccept,
-                    height: 42,
-                    backgroundColor: AppColors.primaryBlue,
-                  ),
-                ),
-                AppGaps.wSM,
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: onReject,
-                    style: OutlinedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(42),
-                      side: const BorderSide(color: AppColors.border),
-                      foregroundColor: AppColors.textPrimary,
-                      shape: RoundedRectangleBorder(borderRadius: AppRadius.md),
+                ],
+              ),
+              AppGaps.hMD,
+              Row(
+                children: [
+                  Expanded(
+                    child: PrimaryButton(
+                      text: 'Accept',
+                      onPressed: onAccept,
+                      height: 42,
+                      backgroundColor: AppColors.primaryBlue,
                     ),
-                    child: const Text('Reject'),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  AppGaps.wSM,
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: onReject,
+                      style: OutlinedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(42),
+                        side: const BorderSide(color: AppColors.border),
+                        foregroundColor: AppColors.textPrimary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: AppRadius.md,
+                        ),
+                      ),
+                      child: const Text('Reject'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

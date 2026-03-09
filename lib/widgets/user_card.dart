@@ -11,12 +11,18 @@ class UserCard extends StatelessWidget {
     required this.userModel,
     this.onAddFriend,
     this.isFriend = false,
+    this.actionText = 'Add Friend',
+    this.isActionEnabled = true,
+    this.isActionLoading = false,
     this.onTap,
   });
 
   final dynamic userModel;
   final VoidCallback? onAddFriend;
   final bool isFriend;
+  final String actionText;
+  final bool isActionEnabled;
+  final bool isActionLoading;
   final VoidCallback? onTap;
 
   @override
@@ -94,8 +100,9 @@ class UserCard extends StatelessWidget {
                 SizedBox(
                   width: 132,
                   child: PrimaryButton(
-                    text: 'Add Friend',
-                    onPressed: onAddFriend,
+                    text: actionText,
+                    onPressed: isActionEnabled ? onAddFriend : null,
+                    isLoading: isActionLoading,
                     height: 40,
                     icon: const Icon(Icons.person_add_alt_1, size: 16),
                   ),

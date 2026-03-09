@@ -45,5 +45,14 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+		<string>fetch</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is required to capture your profile picture.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo library access is required to choose your profile picture.</string>
 </dict>
 </plist>

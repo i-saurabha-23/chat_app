@@ -84,7 +84,9 @@ class SignUpViewModel extends ChangeNotifier {
           FirebaseFields.createdAt: FieldValue.serverTimestamp(),
         });
 
-        transaction.set(userRef, user.toMap());
+        final Map<String, dynamic> userMap = user.toMap();
+        userMap[FirebaseFields.nameLower] = cleanName.toLowerCase();
+        transaction.set(userRef, userMap);
       });
 
       _successMessage = 'Account created successfully.';

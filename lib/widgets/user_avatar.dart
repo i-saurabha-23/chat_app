@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';
@@ -17,12 +20,15 @@ class UserAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool hasImage = imageUrl != null && imageUrl!.trim().isNotEmpty;
+    final ImageProvider<Object>? imageProvider = _resolveImageProvider(
+      imageUrl,
+    );
+    final bool hasImage = imageProvider != null;
 
     final Widget avatar = CircleAvatar(
       radius: radius,
       backgroundColor: AppColors.softBlue,
-      backgroundImage: hasImage ? NetworkImage(imageUrl!) : null,
+      backgroundImage: imageProvider,
       child: hasImage
           ? null
           : Icon(Icons.person, color: AppColors.primaryBlue, size: radius),
@@ -51,5 +57,34 @@ class UserAvatar extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  ImageProvider<Object>? _resolveImageProvider(String? value) {
+    if (value == null) {
+      return null;
+    }
+
+    final String imageValue = value.trim();
+    if (imageValue.isEmpty) {
+      return null;
+    }
+
+    if (imageValue.startsWith('http://') || imageValue.startsWith('https://')) {
+      return NetworkImage(imageValue);
+    }
+
+    try {
+      String base64String = imageValue;
+      if (imageValue.startsWith('data:image')) {
+        final int index = imageValue.indexOf(',');
+        if (index != -1) {
+          base64String = imageValue.substring(index + 1);
+        }
+      }
+      final Uint8List bytes = base64Decode(base64String);
+      return MemoryImage(bytes);
+    } catch (_) {
+      return null;
+    }
   }
 }

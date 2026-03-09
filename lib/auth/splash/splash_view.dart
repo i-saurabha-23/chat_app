@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,9 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  static const Duration _sessionLookupTimeout = Duration(seconds: 4);
+  static const Duration _userLookupTimeout = Duration(seconds: 8);
+
   bool _isLoading = true;
   String? _errorMessage;
 
@@ -33,20 +38,21 @@ class _SplashViewState extends State<SplashView> {
     });
 
     try {
-      final String? userId = await AuthSessionManager.getUserId();
+      final String? userId = await AuthSessionManager.getUserId().timeout(
+        _sessionLookupTimeout,
+        onTimeout: () => null,
+      );
 
       if (userId == null || userId.isEmpty) {
         _navigateTo(const SignInView());
         return;
       }
 
-      final DocumentSnapshot<Map<String, dynamic>> userSnapshot =
-          await FirebaseFirestore.instance
-              .collection(FirebaseCollections.users)
-              .doc(userId)
-              .get();
+      final DocumentSnapshot<Map<String, dynamic>>? userSnapshot = await _fetchUser(
+        userId,
+      );
 
-      if (userSnapshot.exists) {
+      if (userSnapshot != null && userSnapshot.exists) {
         _navigateTo(const BottomNavView());
         return;
       }
@@ -69,6 +75,20 @@ class _SplashViewState extends State<SplashView> {
         _errorMessage = 'Unable to verify session.';
         _isLoading = false;
       });
+    }
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>?> _fetchUser(
+    String userId,
+  ) async {
+    try {
+      return await FirebaseFirestore.instance
+          .collection(FirebaseCollections.users)
+          .doc(userId)
+          .get()
+          .timeout(_userLookupTimeout);
+    } on TimeoutException {
+      return null;
     }
   }
 

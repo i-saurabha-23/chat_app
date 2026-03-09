@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'auth/splash/splash_view.dart';
 import 'constants/app_colors.dart';
 import 'constants/firebase_constants.dart';
+import 'notifications/push_notification_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ Future<void> main() async {
         measurementId: FirebaseConfig.measurementId,
       ),
     );
+    await PushNotificationService.instance.initialize();
   } catch (e) {
     debugPrint('Error initializing Firebase: $e');
   }

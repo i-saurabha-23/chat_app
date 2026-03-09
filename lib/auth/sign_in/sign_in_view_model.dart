@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import '../../constants/encryption_keys.dart';
 import '../../constants/firebase_constants.dart';
 import '../../model/user_model.dart';
+import '../../notifications/push_notification_service.dart';
 import '../auth_session_manager.dart';
 
 class SignInViewModel extends ChangeNotifier {
@@ -82,16 +83,20 @@ class SignInViewModel extends ChangeNotifier {
         return null;
       }
 
-      await userSnapshot.reference.update(<String, dynamic>{
-        FirebaseFields.isOnline: true,
-        FirebaseFields.lastSeen: FieldValue.serverTimestamp(),
-      });
-
       await AuthSessionManager.saveSession(
         userId: user.userId,
         username: user.username,
         name: user.name,
       );
+      await userSnapshot.reference
+          .update(<String, dynamic>{
+            FirebaseFields.isOnline: true,
+            FirebaseFields.lastSeen: FieldValue.serverTimestamp(),
+          })
+          .catchError((_) {});
+      await PushNotificationService.instance
+          .registerTokenForUser(user.userId)
+          .catchError((_) {});
 
       return user;
     } on FirebaseException catch (error) {
@@ -110,6 +115,9 @@ class SignInViewModel extends ChangeNotifier {
     final String? activeUserId = userId ?? await AuthSessionManager.getUserId();
 
     if (activeUserId != null && activeUserId.isNotEmpty) {
+      await PushNotificationService.instance
+          .unregisterTokenForUser(activeUserId)
+          .catchError((_) {});
       await _firestore
           .collection(FirebaseCollections.users)
           .doc(activeUserId)

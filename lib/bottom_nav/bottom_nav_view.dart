@@ -15,7 +15,7 @@ class BottomNavView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<BottomNavViewModel>(
-      create: (_) => BottomNavViewModel(),
+      create: (_) => BottomNavViewModel()..initialize(),
       child: const _BottomNavBody(),
     );
   }
@@ -28,6 +28,7 @@ class _BottomNavBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<BottomNavViewModel>(
       builder: (BuildContext context, BottomNavViewModel viewModel, _) {
+        final int pendingRequestCount = viewModel.pendingRequestCount;
         return Scaffold(
           body: IndexedStack(
             index: viewModel.selectedIndex,
@@ -45,31 +46,56 @@ class _BottomNavBody extends StatelessWidget {
             backgroundColor: AppColors.surface,
             indicatorColor: AppColors.softBlue,
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            destinations: const <NavigationDestination>[
+            destinations: <NavigationDestination>[
               NavigationDestination(
-                icon: Icon(Icons.chat_bubble_outline_rounded),
-                selectedIcon: Icon(Icons.chat_bubble_rounded),
+                icon: const Icon(Icons.chat_bubble_outline_rounded),
+                selectedIcon: const Icon(Icons.chat_bubble_rounded),
                 label: 'Chats',
               ),
               NavigationDestination(
-                icon: Icon(Icons.group_outlined),
-                selectedIcon: Icon(Icons.group),
+                icon: _friendsIcon(
+                  isSelected: false,
+                  pendingRequestCount: pendingRequestCount,
+                ),
+                selectedIcon: _friendsIcon(
+                  isSelected: true,
+                  pendingRequestCount: pendingRequestCount,
+                ),
                 label: 'Friends',
               ),
               NavigationDestination(
-                icon: Icon(Icons.person_outline_rounded),
-                selectedIcon: Icon(Icons.person_rounded),
+                icon: const Icon(Icons.person_outline_rounded),
+                selectedIcon: const Icon(Icons.person_rounded),
                 label: 'Profile',
               ),
               NavigationDestination(
-                icon: Icon(Icons.settings_outlined),
-                selectedIcon: Icon(Icons.settings),
+                icon: const Icon(Icons.settings_outlined),
+                selectedIcon: const Icon(Icons.settings),
                 label: 'Settings',
               ),
             ],
           ),
         );
       },
+    );
+  }
+
+  Widget _friendsIcon({
+    required bool isSelected,
+    required int pendingRequestCount,
+  }) {
+    final Widget icon = Icon(isSelected ? Icons.group : Icons.group_outlined);
+    if (pendingRequestCount <= 0) {
+      return icon;
+    }
+
+    return Badge(
+      backgroundColor: AppColors.error,
+      textColor: AppColors.textOnPrimary,
+      label: Text(
+        pendingRequestCount > 99 ? '99+' : pendingRequestCount.toString(),
+      ),
+      child: icon,
     );
   }
 }
